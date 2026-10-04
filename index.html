@@ -3,114 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bess ONE | Cerveza Artesanal Premium</title>
-
+    <title>Bess ONE | Cerveza Artesanal</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome 6 -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Yellowtail&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        amber: {
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
-                        },
-                        obsidian: '#090807',
-                        cardbg: 'rgba(23, 20, 18, 0.75)',
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        brand: ['Yellowtail', 'cursive'],
-                    },
-                    animation: {
-                        'glow-pulse': 'glowPulse 4s ease-in-out infinite alternate',
-                        'float': 'float 5s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        glowPulse: {
-                            '0%': { opacity: '0.2', transform: 'scale(0.95)' },
-                            '100%': { opacity: '0.45', transform: 'scale(1.05)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-8px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 
     <style>
         body {
-            background-color: #090807;
-            color: #f5f5f4;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
         }
 
-        /* Glassmorphism Styles */
-        .glass-panel {
-            background: rgba(26, 22, 19, 0.65);
+        .font-brand {
+            font-family: 'Yellowtail', cursive;
+        }
+
+        .bg-cervecero {
+            position: relative;
+            background-image: url('fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .bg-cervecero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.90) 0%, rgba(10, 10, 10, 0.96) 100%);
+            z-index: 0;
+        }
+
+        .glass-card {
+            background: rgba(23, 23, 23, 0.7);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .glass-card {
-            background: rgba(22, 19, 16, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(245, 158, 11, 0.4);
-            box-shadow: 0 20px 40px -15px rgba(245, 158, 11, 0.18), 0 0 15px rgba(245, 158, 11, 0.1);
-        }
-
         .glass-nav {
-            background: rgba(9, 8, 7, 0.82);
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #090807;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #27221e;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #f59e0b;
+        .prod-card {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Ambient Glow Backgrounds */
-        .hero-bg {
-            background-image: radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.15) 0%, rgba(9, 8, 7, 0.95) 70%), url('fondo.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        .prod-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 16px 35px -10px rgba(245, 158, 11, 0.25);
         }
 
-        /* Hide Input Number Arrows */
+        /* Ocultar flechas del input number */
         input[type=number]::-webkit-inner-spin-button,
         input[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none;
@@ -122,106 +74,84 @@
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-obsidian">
+<body class="bg-neutral-950 text-neutral-100 bg-cervecero min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-neutral-950">
 
-    <nav class="sticky top-0 z-40 glass-nav py-3 px-4 sm:px-8 transition-all duration-300">
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-40 glass-nav py-3.5 px-4 sm:px-8">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <!-- Logo Brand -->
             <a href="#" class="flex items-center gap-3 group">
-                <img src="Logo BessONE.png" onerror="this.onerror=null; this.src='https://placehold.co/150x60/1c1917/f59e0b?text=Bess+ONE'" alt="Bess ONE Logo" class="h-11 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                <img src="Logo BessONE.png" alt="Logo Bess ONE" class="h-12 sm:h-14 w-auto object-contain transition-transform group-hover:scale-105">
             </a>
 
-            <!-- Nav Links -->
             <div class="flex items-center gap-6">
-                <ul class="hidden md:flex gap-8 text-xs uppercase tracking-[0.2em] font-bold text-stone-300">
-                    <li><a href="#cervezas" class="hover:text-amber-400 transition-colors">Carta de Cervezas</a></li>
-                    <li><a href="#esencia" class="hover:text-amber-400 transition-colors">Nuestra Esencia</a></li>
-                    <li><a href="#contacto" class="hover:text-amber-400 transition-colors">Contacto</a></li>
+                <ul class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-neutral-300">
+                    <li><a href="#cervezas" class="hover:text-amber-500 transition-colors">Estilos</a></li>
+                    <li><a href="#nosotros" class="hover:text-amber-500 transition-colors">Nosotros</a></li>
+                    <li><a href="#contacto" class="hover:text-amber-500 transition-colors">Contacto</a></li>
                 </ul>
 
-                <!-- Order Cart Button -->
-                <button onclick="toggleCartDrawer()" class="relative bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2.5 transition-all shadow-lg hover:shadow-amber-500/10 active:scale-95">
-                    <i class="fas fa-shopping-bag text-sm"></i>
-                    <span class="hidden sm:inline">Tu Pedido</span>
-                    <span id="nav-cart-count" class="bg-amber-500 text-obsidian w-5 h-5 rounded-full text-[10px] flex items-center justify-center font-extrabold shadow-md">0</span>
+                <!-- Botón Carrito Flotante Nav -->
+                <button onclick="toggleCartDrawer()" class="relative bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 border border-amber-500/30 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all active:scale-95">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="hidden sm:inline">Pedido</span>
+                    <span id="nav-cart-count" class="bg-amber-500 text-neutral-950 w-5 h-5 rounded-full text-[10px] flex items-center justify-center font-extrabold">0</span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <header class="relative hero-bg z-10 py-20 sm:py-32 px-4 text-center overflow-hidden">
-        <!-- Glowing Ambient Lights Behind Hero -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none animate-glow-pulse"></div>
+    <!-- HERO SECTION -->
+    <header class="relative z-10 py-16 sm:py-24 px-4 text-center max-w-4xl mx-auto flex flex-col items-center">
+        <span class="text-[11px] sm:text-xs font-bold uppercase tracking-[0.3em] text-amber-400 bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full mb-4 inline-block">
+            Cerveza Artesanal Premium
+        </span>
 
-        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-            <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-amber-400 bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full mb-6 backdrop-blur-md">
-                <i class="fas fa-crown text-[10px]"></i> Craft Brewery Studio
-            </div>
+        <h1 class="text-6xl sm:text-8xl text-amber-500 font-brand drop-shadow-2xl my-2">
+            Bess ONE
+        </h1>
 
-            <h1 class="text-7xl sm:text-9xl text-amber-500 font-brand drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] my-1 leading-none">
-                Bess ONE
-            </h1>
+        <span class="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-neutral-400 mb-6">
+            Desde 2019
+        </span>
 
-            <span class="text-xs sm:text-sm font-extrabold uppercase tracking-[0.4em] text-stone-400 mb-6 block">
-                Cerveza Artesanal • Est. 2019
-            </span>
+        <p class="max-w-xl text-neutral-300 text-sm sm:text-base leading-relaxed italic mb-8 font-light">
+            "Nacimos de la pasión por el detalle y el respeto absoluto por los tiempos de fermentación. Cada lote de Bess ONE es una pieza única, creada para quienes valoran la autenticidad en cada trago."
+        </p>
 
-            <p class="max-w-xl text-stone-300 text-sm sm:text-base leading-relaxed italic mb-8 font-light">
-                "Nacimos de la pasión por el detalle y el respeto absoluto por los tiempos de fermentación. Cada lote de Bess ONE es una pieza de autor creada para paladares exigentes."
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 items-center">
-                <a href="#cervezas" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-obsidian font-extrabold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full shadow-xl shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-3">
-                    Explorar Carta <i class="fas fa-arrow-down text-xs"></i>
-                </a>
-                <a href="https://wa.me/5491158024010" target="_blank" class="glass-panel text-stone-200 hover:text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full transition-all hover:bg-stone-800/60 flex items-center gap-2">
-                    <i class="fab fa-whatsapp text-emerald-400 text-sm"></i> WhatsApp Directo
-                </a>
-            </div>
-        </div>
+        <a href="#cervezas" class="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider px-8 py-3.5 rounded-full shadow-lg shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
+            Explorar Variedades <i class="fas fa-arrow-down text-xs"></i>
+        </a>
     </header>
 
-    <section id="cervezas" class="relative z-10 py-16 px-4 sm:px-8 max-w-7xl mx-auto w-full">
-        <div class="text-center mb-10">
-            <span class="text-amber-500 text-xs uppercase font-extrabold tracking-[0.25em] block mb-2">Colección Selección</span>
-            <h2 class="text-3xl sm:text-5xl font-extrabold uppercase tracking-wider text-stone-100">
-                Nuestros Estilos
+    <!-- SECCIÓN DE PRODUCTOS -->
+    <section id="cervezas" class="relative z-10 py-12 px-4 sm:px-8 max-w-7xl mx-auto w-full">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-wider text-neutral-100">
+                Nuestras Variedades
             </h2>
-            <div class="w-16 h-1 bg-amber-500 mx-auto mt-4 rounded-full shadow-lg shadow-amber-500/50"></div>
+            <div class="w-16 h-1 bg-amber-500 mx-auto mt-3 rounded-full"></div>
         </div>
 
-        <!-- Filter Category Tabs -->
-        <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
-            <button onclick="filterBeers('all')" class="filter-btn active text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500 text-obsidian transition-all">Todas</button>
-            <button onclick="filterBeers('rubia')" class="filter-btn text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full border border-stone-800 bg-stone-900/60 text-stone-300 hover:border-amber-500/40 transition-all">Rubias</button>
-            <button onclick="filterBeers('roja')" class="filter-btn text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full border border-stone-800 bg-stone-900/60 text-stone-300 hover:border-amber-500/40 transition-all">Rojas</button>
-            <button onclick="filterBeers('negra')" class="filter-btn text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full border border-stone-800 bg-stone-900/60 text-stone-300 hover:border-amber-500/40 transition-all">Negras</button>
-            <button onclick="filterBeers('lupulada')" class="filter-btn text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full border border-stone-800 bg-stone-900/60 text-stone-300 hover:border-amber-500/40 transition-all">Lupuladas</button>
-        </div>
-
-        <!-- GRID OF BEERS -->
+        <!-- GRID DE TARJETAS -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
             <!-- GOLDEN -->
-            <div class="beer-card glass-card rounded-2xl p-4 flex flex-col justify-between" data-category="rubia">
+            <div class="prod-card glass-card rounded-2xl p-4 flex flex-col justify-between">
                 <div>
-                    <!-- Product Image Box -->
-                    <div class="relative bg-gradient-to-b from-stone-900/90 to-stone-950/80 rounded-xl p-4 mb-4 flex items-center justify-center h-60 border border-stone-800/80 overflow-hidden group">
-                        <div class="absolute inset-0 bg-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <img src="golden.png" onerror="this.onerror=null; this.src='https://placehold.co/200x300/1c1917/f59e0b?text=Golden'" alt="Golden Bess ONE" class="h-full w-auto object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-105">
+                    <div class="relative bg-neutral-900/80 rounded-xl p-4 mb-4 flex items-center justify-center h-56 border border-neutral-800">
+                        <img src="golden.png" alt="Golden" class="h-full w-auto object-contain drop-shadow-xl">
                     </div>
-                    
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-extrabold text-stone-100">Golden</h3>
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">Refrescante</span>
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="text-lg font-bold text-neutral-100">Golden</h3>
+                        <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Refrescante</span>
                     </div>
-                    <p class="text-xs text-stone-400 mb-4 line-clamp-2 leading-relaxed">Cerveza dorada, ultra ligera y equilibrada. Perfil sedoso y bajo amargor.</p>
+                    <p class="text-xs text-neutral-400 mb-4 line-clamp-2">Cerveza dorada, ligera y refrescante. Equilibrada y de bajo amargor.</p>
                 </div>
 
-                <div class="space-y-3 pt-3 border-t border-stone-800/80">
+                <div class="space-y-3 pt-2 border-t border-neutral-800">
                     <div>
-                        <label class="text-[10px] text-stone-400 uppercase font-bold tracking-wider block mb-1">Formato de Selección</label>
-                        <select id="sel-golden" class="w-full bg-stone-900 text-stone-200 text-xs p-2.5 rounded-xl border border-stone-700/60 focus:outline-none focus:border-amber-500">
+                        <label class="text-[10px] text-neutral-400 uppercase font-semibold block mb-1">Formato</label>
+                        <select id="sel-golden" class="w-full bg-neutral-900 text-neutral-200 text-xs p-2.5 rounded-xl border border-neutral-700/60 focus:outline-none focus:border-amber-500">
                             <option value="Lata 473ml">Lata 473ml</option>
                             <option value="Botella 500ml">Botella 500ml</option>
                             <option value="Barril 20L">Barril 20L</option>
@@ -231,37 +161,35 @@
                     </div>
 
                     <div class="flex gap-2 items-center">
-                        <div class="flex items-center bg-stone-900 border border-stone-700/60 rounded-xl overflow-hidden">
-                            <button onclick="adjustQty('cant-golden', -1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
-                            <input type="number" id="cant-golden" value="1" min="1" class="w-9 bg-transparent text-center text-xs font-bold text-stone-100 focus:outline-none">
-                            <button onclick="adjustQty('cant-golden', 1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
+                        <div class="flex items-center bg-neutral-900 border border-neutral-700/60 rounded-xl overflow-hidden">
+                            <button onclick="adjustQty('cant-golden', -1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
+                            <input type="number" id="cant-golden" value="1" min="1" class="w-10 bg-transparent text-center text-xs font-bold text-neutral-100 focus:outline-none">
+                            <button onclick="adjustQty('cant-golden', 1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
                         </div>
-                        <button onclick="agregarAlCarrito('Golden', 'sel-golden', 'cant-golden')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-obsidian font-extrabold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-amber-500/20">
-                            <i class="fas fa-cart-plus text-xs"></i> Agregar
+                        <button onclick="agregarAlCarrito('Golden', 'sel-golden', 'cant-golden')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/10">
+                            <i class="fas fa-plus text-[10px]"></i> Agregar
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- HONEY -->
-            <div class="beer-card glass-card rounded-2xl p-4 flex flex-col justify-between" data-category="rubia">
+            <div class="prod-card glass-card rounded-2xl p-4 flex flex-col justify-between">
                 <div>
-                    <div class="relative bg-gradient-to-b from-stone-900/90 to-stone-950/80 rounded-xl p-4 mb-4 flex items-center justify-center h-60 border border-stone-800/80 overflow-hidden group">
-                        <div class="absolute inset-0 bg-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <img src="honey.png" onerror="this.onerror=null; this.src='https://placehold.co/200x300/1c1917/f59e0b?text=Honey'" alt="Honey Bess ONE" class="h-full w-auto object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-105">
+                    <div class="relative bg-neutral-900/80 rounded-xl p-4 mb-4 flex items-center justify-center h-56 border border-neutral-800">
+                        <img src="honey.png" alt="Honey" class="h-full w-auto object-contain drop-shadow-xl">
                     </div>
-                    
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-extrabold text-stone-100">Honey</h3>
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">Dulce & Suave</span>
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="text-lg font-bold text-neutral-100">Honey</h3>
+                        <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Dulce & Suave</span>
                     </div>
-                    <p class="text-xs text-stone-400 mb-4 line-clamp-2 leading-relaxed">Infusionada con miel pura de abejas seleccionadas. Notas dulzonas e insuperable aroma.</p>
+                    <p class="text-xs text-neutral-400 mb-4 line-clamp-2">Sabor suave con notas naturales de miel artesanal seleccionada.</p>
                 </div>
 
-                <div class="space-y-3 pt-3 border-t border-stone-800/80">
+                <div class="space-y-3 pt-2 border-t border-neutral-800">
                     <div>
-                        <label class="text-[10px] text-stone-400 uppercase font-bold tracking-wider block mb-1">Formato de Selección</label>
-                        <select id="sel-honey" class="w-full bg-stone-900 text-stone-200 text-xs p-2.5 rounded-xl border border-stone-700/60 focus:outline-none focus:border-amber-500">
+                        <label class="text-[10px] text-neutral-400 uppercase font-semibold block mb-1">Formato</label>
+                        <select id="sel-honey" class="w-full bg-neutral-900 text-neutral-200 text-xs p-2.5 rounded-xl border border-neutral-700/60 focus:outline-none focus:border-amber-500">
                             <option value="Lata 473ml">Lata 473ml</option>
                             <option value="Botella 500ml">Botella 500ml</option>
                             <option value="Barril 20L">Barril 20L</option>
@@ -271,37 +199,35 @@
                     </div>
 
                     <div class="flex gap-2 items-center">
-                        <div class="flex items-center bg-stone-900 border border-stone-700/60 rounded-xl overflow-hidden">
-                            <button onclick="adjustQty('cant-honey', -1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
-                            <input type="number" id="cant-honey" value="1" min="1" class="w-9 bg-transparent text-center text-xs font-bold text-stone-100 focus:outline-none">
-                            <button onclick="adjustQty('cant-honey', 1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
+                        <div class="flex items-center bg-neutral-900 border border-neutral-700/60 rounded-xl overflow-hidden">
+                            <button onclick="adjustQty('cant-honey', -1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
+                            <input type="number" id="cant-honey" value="1" min="1" class="w-10 bg-transparent text-center text-xs font-bold text-neutral-100 focus:outline-none">
+                            <button onclick="adjustQty('cant-honey', 1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
                         </div>
-                        <button onclick="agregarAlCarrito('Honey', 'sel-honey', 'cant-honey')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-obsidian font-extrabold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-amber-500/20">
-                            <i class="fas fa-cart-plus text-xs"></i> Agregar
+                        <button onclick="agregarAlCarrito('Honey', 'sel-honey', 'cant-honey')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/10">
+                            <i class="fas fa-plus text-[10px]"></i> Agregar
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- IRISH RED -->
-            <div class="beer-card glass-card rounded-2xl p-4 flex flex-col justify-between" data-category="roja">
+            <div class="prod-card glass-card rounded-2xl p-4 flex flex-col justify-between">
                 <div>
-                    <div class="relative bg-gradient-to-b from-stone-900/90 to-stone-950/80 rounded-xl p-4 mb-4 flex items-center justify-center h-60 border border-stone-800/80 overflow-hidden group">
-                        <div class="absolute inset-0 bg-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <img src="irish.png" onerror="this.onerror=null; this.src='https://placehold.co/200x300/1c1917/ef4444?text=Irish+Red'" alt="Irish Red Bess ONE" class="h-full w-auto object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-105">
+                    <div class="relative bg-neutral-900/80 rounded-xl p-4 mb-4 flex items-center justify-center h-56 border border-neutral-800">
+                        <img src="irish.png" alt="Irish Red" class="h-full w-auto object-contain drop-shadow-xl">
                     </div>
-                    
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-extrabold text-stone-100">Irish Red</h3>
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-red-400 bg-red-500/10 px-2.5 py-1 rounded-full border border-red-500/20">Maltosa</span>
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="text-lg font-bold text-neutral-100">Irish Red</h3>
+                        <span class="text-[10px] font-bold text-red-400 bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20">Caramelo</span>
                     </div>
-                    <p class="text-xs text-stone-400 mb-4 line-clamp-2 leading-relaxed">Roja cobriza de perfil tradicional irlando-británico. Delicadas notas caramelizadas.</p>
+                    <p class="text-xs text-neutral-400 mb-4 line-clamp-2">Roja cobriza con perfil a maltas tostadas y suave perfil acaramelado.</p>
                 </div>
 
-                <div class="space-y-3 pt-3 border-t border-stone-800/80">
+                <div class="space-y-3 pt-2 border-t border-neutral-800">
                     <div>
-                        <label class="text-[10px] text-stone-400 uppercase font-bold tracking-wider block mb-1">Formato de Selección</label>
-                        <select id="sel-irish" class="w-full bg-stone-900 text-stone-200 text-xs p-2.5 rounded-xl border border-stone-700/60 focus:outline-none focus:border-amber-500">
+                        <label class="text-[10px] text-neutral-400 uppercase font-semibold block mb-1">Formato</label>
+                        <select id="sel-irish" class="w-full bg-neutral-900 text-neutral-200 text-xs p-2.5 rounded-xl border border-neutral-700/60 focus:outline-none focus:border-amber-500">
                             <option value="Lata 473ml">Lata 473ml</option>
                             <option value="Botella 500ml">Botella 500ml</option>
                             <option value="Barril 20L">Barril 20L</option>
@@ -311,37 +237,35 @@
                     </div>
 
                     <div class="flex gap-2 items-center">
-                        <div class="flex items-center bg-stone-900 border border-stone-700/60 rounded-xl overflow-hidden">
-                            <button onclick="adjustQty('cant-irish', -1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
-                            <input type="number" id="cant-irish" value="1" min="1" class="w-9 bg-transparent text-center text-xs font-bold text-stone-100 focus:outline-none">
-                            <button onclick="adjustQty('cant-irish', 1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
+                        <div class="flex items-center bg-neutral-900 border border-neutral-700/60 rounded-xl overflow-hidden">
+                            <button onclick="adjustQty('cant-irish', -1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
+                            <input type="number" id="cant-irish" value="1" min="1" class="w-10 bg-transparent text-center text-xs font-bold text-neutral-100 focus:outline-none">
+                            <button onclick="adjustQty('cant-irish', 1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
                         </div>
-                        <button onclick="agregarAlCarrito('Irish Red', 'sel-irish', 'cant-irish')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-obsidian font-extrabold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-amber-500/20">
-                            <i class="fas fa-cart-plus text-xs"></i> Agregar
+                        <button onclick="agregarAlCarrito('Irish Red', 'sel-irish', 'cant-irish')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/10">
+                            <i class="fas fa-plus text-[10px]"></i> Agregar
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- RED IPA -->
-            <div class="beer-card glass-card rounded-2xl p-4 flex flex-col justify-between" data-category="roja lupulada">
+            <div class="prod-card glass-card rounded-2xl p-4 flex flex-col justify-between">
                 <div>
-                    <div class="relative bg-gradient-to-b from-stone-900/90 to-stone-950/80 rounded-xl p-4 mb-4 flex items-center justify-center h-60 border border-stone-800/80 overflow-hidden group">
-                        <div class="absolute inset-0 bg-rose-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <img src="redipa.png" onerror="this.onerror=null; this.src='https://placehold.co/200x300/1c1917/f43f5e?text=Red+IPA'" alt="Red IPA Bess ONE" class="h-full w-auto object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-105">
+                    <div class="relative bg-neutral-900/80 rounded-xl p-4 mb-4 flex items-center justify-center h-56 border border-neutral-800">
+                        <img src="redipa.png" alt="Red IPA" class="h-full w-auto object-contain drop-shadow-xl">
                     </div>
-                    
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-extrabold text-stone-100">Red IPA</h3>
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-full border border-rose-500/20">Lupulada & Roza</span>
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="text-lg font-bold text-neutral-100">Red IPA</h3>
+                        <span class="text-[10px] font-bold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">Lupulada</span>
                     </div>
-                    <p class="text-xs text-stone-400 mb-4 line-clamp-2 leading-relaxed">El equilibrio entre el dulzor de maltas especiales y un aroma floral e intenso.</p>
+                    <p class="text-xs text-neutral-400 mb-4 line-clamp-2">Combinación perfecta entre el carácter de maltas rojas y el lúpulo intenso.</p>
                 </div>
 
-                <div class="space-y-3 pt-3 border-t border-stone-800/80">
+                <div class="space-y-3 pt-2 border-t border-neutral-800">
                     <div>
-                        <label class="text-[10px] text-stone-400 uppercase font-bold tracking-wider block mb-1">Formato de Selección</label>
-                        <select id="sel-redipa" class="w-full bg-stone-900 text-stone-200 text-xs p-2.5 rounded-xl border border-stone-700/60 focus:outline-none focus:border-amber-500">
+                        <label class="text-[10px] text-neutral-400 uppercase font-semibold block mb-1">Formato</label>
+                        <select id="sel-redipa" class="w-full bg-neutral-900 text-neutral-200 text-xs p-2.5 rounded-xl border border-neutral-700/60 focus:outline-none focus:border-amber-500">
                             <option value="Lata 473ml">Lata 473ml</option>
                             <option value="Botella 500ml">Botella 500ml</option>
                             <option value="Barril 20L">Barril 20L</option>
@@ -351,37 +275,35 @@
                     </div>
 
                     <div class="flex gap-2 items-center">
-                        <div class="flex items-center bg-stone-900 border border-stone-700/60 rounded-xl overflow-hidden">
-                            <button onclick="adjustQty('cant-redipa', -1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
-                            <input type="number" id="cant-redipa" value="1" min="1" class="w-9 bg-transparent text-center text-xs font-bold text-stone-100 focus:outline-none">
-                            <button onclick="adjustQty('cant-redipa', 1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
+                        <div class="flex items-center bg-neutral-900 border border-neutral-700/60 rounded-xl overflow-hidden">
+                            <button onclick="adjustQty('cant-redipa', -1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
+                            <input type="number" id="cant-redipa" value="1" min="1" class="w-10 bg-transparent text-center text-xs font-bold text-neutral-100 focus:outline-none">
+                            <button onclick="adjustQty('cant-redipa', 1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
                         </div>
-                        <button onclick="agregarAlCarrito('Red IPA', 'sel-redipa', 'cant-redipa')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-obsidian font-extrabold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-amber-500/20">
-                            <i class="fas fa-cart-plus text-xs"></i> Agregar
+                        <button onclick="agregarAlCarrito('Red IPA', 'sel-redipa', 'cant-redipa')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/10">
+                            <i class="fas fa-plus text-[10px]"></i> Agregar
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- IPA -->
-            <div class="beer-card glass-card rounded-2xl p-4 flex flex-col justify-between" data-category="lupulada">
+            <div class="prod-card glass-card rounded-2xl p-4 flex flex-col justify-between">
                 <div>
-                    <div class="relative bg-gradient-to-b from-stone-900/90 to-stone-950/80 rounded-xl p-4 mb-4 flex items-center justify-center h-60 border border-stone-800/80 overflow-hidden group">
-                        <div class="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <img src="ipa.png" onerror="this.onerror=null; this.src='https://placehold.co/200x300/1c1917/10b981?text=IPA'" alt="IPA Bess ONE" class="h-full w-auto object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-105">
+                    <div class="relative bg-neutral-900/80 rounded-xl p-4 mb-4 flex items-center justify-center h-56 border border-neutral-800">
+                        <img src="ipa.png" alt="IPA" class="h-full w-auto object-contain drop-shadow-xl">
                     </div>
-                    
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-extrabold text-stone-100">IPA</h3>
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">Cítrica & Intensa</span>
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="text-lg font-bold text-neutral-100">IPA</h3>
+                        <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Intensa</span>
                     </div>
-                    <p class="text-xs text-stone-400 mb-4 line-clamp-2 leading-relaxed">Cargada de lúpulos seleccionados. Carácter cítrico, herbal y amargor persistente.</p>
+                    <p class="text-xs text-neutral-400 mb-4 line-clamp-2">Aroma cítrico y herbal pronunciado con un amargor marcado y fresco.</p>
                 </div>
 
-                <div class="space-y-3 pt-3 border-t border-stone-800/80">
+                <div class="space-y-3 pt-2 border-t border-neutral-800">
                     <div>
-                        <label class="text-[10px] text-stone-400 uppercase font-bold tracking-wider block mb-1">Formato de Selección</label>
-                        <select id="sel-ipa" class="w-full bg-stone-900 text-stone-200 text-xs p-2.5 rounded-xl border border-stone-700/60 focus:outline-none focus:border-amber-500">
+                        <label class="text-[10px] text-neutral-400 uppercase font-semibold block mb-1">Formato</label>
+                        <select id="sel-ipa" class="w-full bg-neutral-900 text-neutral-200 text-xs p-2.5 rounded-xl border border-neutral-700/60 focus:outline-none focus:border-amber-500">
                             <option value="Lata 473ml">Lata 473ml</option>
                             <option value="Botella 500ml">Botella 500ml</option>
                             <option value="Barril 20L">Barril 20L</option>
@@ -391,37 +313,35 @@
                     </div>
 
                     <div class="flex gap-2 items-center">
-                        <div class="flex items-center bg-stone-900 border border-stone-700/60 rounded-xl overflow-hidden">
-                            <button onclick="adjustQty('cant-ipa', -1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
-                            <input type="number" id="cant-ipa" value="1" min="1" class="w-9 bg-transparent text-center text-xs font-bold text-stone-100 focus:outline-none">
-                            <button onclick="adjustQty('cant-ipa', 1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
+                        <div class="flex items-center bg-neutral-900 border border-neutral-700/60 rounded-xl overflow-hidden">
+                            <button onclick="adjustQty('cant-ipa', -1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
+                            <input type="number" id="cant-ipa" value="1" min="1" class="w-10 bg-transparent text-center text-xs font-bold text-neutral-100 focus:outline-none">
+                            <button onclick="adjustQty('cant-ipa', 1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
                         </div>
-                        <button onclick="agregarAlCarrito('IPA', 'sel-ipa', 'cant-ipa')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-obsidian font-extrabold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-amber-500/20">
-                            <i class="fas fa-cart-plus text-xs"></i> Agregar
+                        <button onclick="agregarAlCarrito('IPA', 'sel-ipa', 'cant-ipa')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/10">
+                            <i class="fas fa-plus text-[10px]"></i> Agregar
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- STOUT -->
-            <div class="beer-card glass-card rounded-2xl p-4 flex flex-col justify-between" data-category="negra">
+            <div class="prod-card glass-card rounded-2xl p-4 flex flex-col justify-between">
                 <div>
-                    <div class="relative bg-gradient-to-b from-stone-900/90 to-stone-950/80 rounded-xl p-4 mb-4 flex items-center justify-center h-60 border border-stone-800/80 overflow-hidden group">
-                        <div class="absolute inset-0 bg-stone-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <img src="stout.png" onerror="this.onerror=null; this.src='https://placehold.co/200x300/1c1917/a8a29e?text=Stout'" alt="Stout Bess ONE" class="h-full w-auto object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-105">
+                    <div class="relative bg-neutral-900/80 rounded-xl p-4 mb-4 flex items-center justify-center h-56 border border-neutral-800">
+                        <img src="stout.png" alt="Stout" class="h-full w-auto object-contain drop-shadow-xl">
                     </div>
-                    
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-extrabold text-stone-100">Stout</h3>
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-stone-300 bg-stone-500/20 px-2.5 py-1 rounded-full border border-stone-500/30">Café & Cacao</span>
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="text-lg font-bold text-neutral-100">Stout</h3>
+                        <span class="text-[10px] font-bold text-neutral-300 bg-neutral-500/20 px-2 py-0.5 rounded border border-neutral-500/30">Café & Cacao</span>
                     </div>
-                    <p class="text-xs text-stone-400 mb-4 line-clamp-2 leading-relaxed">Cerveza oscura e intensa. Notas a grano tostado, expreso y chocolate amargo.</p>
+                    <p class="text-xs text-neutral-400 mb-4 line-clamp-2">Cerveza negra intensa con aroma a café, chocolate y malta tostada.</p>
                 </div>
 
-                <div class="space-y-3 pt-3 border-t border-stone-800/80">
+                <div class="space-y-3 pt-2 border-t border-neutral-800">
                     <div>
-                        <label class="text-[10px] text-stone-400 uppercase font-bold tracking-wider block mb-1">Formato de Selección</label>
-                        <select id="sel-stout" class="w-full bg-stone-900 text-stone-200 text-xs p-2.5 rounded-xl border border-stone-700/60 focus:outline-none focus:border-amber-500">
+                        <label class="text-[10px] text-neutral-400 uppercase font-semibold block mb-1">Formato</label>
+                        <select id="sel-stout" class="w-full bg-neutral-900 text-neutral-200 text-xs p-2.5 rounded-xl border border-neutral-700/60 focus:outline-none focus:border-amber-500">
                             <option value="Lata 473ml">Lata 473ml</option>
                             <option value="Botella 500ml">Botella 500ml</option>
                             <option value="Barril 20L">Barril 20L</option>
@@ -431,37 +351,35 @@
                     </div>
 
                     <div class="flex gap-2 items-center">
-                        <div class="flex items-center bg-stone-900 border border-stone-700/60 rounded-xl overflow-hidden">
-                            <button onclick="adjustQty('cant-stout', -1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
-                            <input type="number" id="cant-stout" value="1" min="1" class="w-9 bg-transparent text-center text-xs font-bold text-stone-100 focus:outline-none">
-                            <button onclick="adjustQty('cant-stout', 1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
+                        <div class="flex items-center bg-neutral-900 border border-neutral-700/60 rounded-xl overflow-hidden">
+                            <button onclick="adjustQty('cant-stout', -1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
+                            <input type="number" id="cant-stout" value="1" min="1" class="w-10 bg-transparent text-center text-xs font-bold text-neutral-100 focus:outline-none">
+                            <button onclick="adjustQty('cant-stout', 1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
                         </div>
-                        <button onclick="agregarAlCarrito('Stout', 'sel-stout', 'cant-stout')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-obsidian font-extrabold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-amber-500/20">
-                            <i class="fas fa-cart-plus text-xs"></i> Agregar
+                        <button onclick="agregarAlCarrito('Stout', 'sel-stout', 'cant-stout')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/10">
+                            <i class="fas fa-plus text-[10px]"></i> Agregar
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- SWEET STOUT -->
-            <div class="beer-card glass-card rounded-2xl p-4 flex flex-col justify-between" data-category="negra">
+            <div class="prod-card glass-card rounded-2xl p-4 flex flex-col justify-between">
                 <div>
-                    <div class="relative bg-gradient-to-b from-stone-900/90 to-stone-950/80 rounded-xl p-4 mb-4 flex items-center justify-center h-60 border border-stone-800/80 overflow-hidden group">
-                        <div class="absolute inset-0 bg-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <img src="sweetstout.png" onerror="this.onerror=null; this.src='https://placehold.co/200x300/1c1917/d97706?text=Sweet+Stout'" alt="Sweet Stout Bess ONE" class="h-full w-auto object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] transition-transform duration-500 group-hover:scale-105">
+                    <div class="relative bg-neutral-900/80 rounded-xl p-4 mb-4 flex items-center justify-center h-56 border border-neutral-800">
+                        <img src="sweetstout.png" alt="Sweet Stout" class="h-full w-auto object-contain drop-shadow-xl">
                     </div>
-                    
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-extrabold text-stone-100">Sweet Stout</h3>
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-300 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">Cremosa & Lactosa</span>
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="text-lg font-bold text-neutral-100">Sweet Stout</h3>
+                        <span class="text-[10px] font-bold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Cremosa</span>
                     </div>
-                    <p class="text-xs text-stone-400 mb-4 line-clamp-2 leading-relaxed">Cuerpo robusto y aterciopelado con sutil dulzor lácteo y reminiscencias de cacao.</p>
+                    <p class="text-xs text-neutral-400 mb-4 line-clamp-2">Negra de cuerpo cremoso con sutiles notas dulzonas a lactosa y cacao.</p>
                 </div>
 
-                <div class="space-y-3 pt-3 border-t border-stone-800/80">
+                <div class="space-y-3 pt-2 border-t border-neutral-800">
                     <div>
-                        <label class="text-[10px] text-stone-400 uppercase font-bold tracking-wider block mb-1">Formato de Selección</label>
-                        <select id="sel-sweetstout" class="w-full bg-stone-900 text-stone-200 text-xs p-2.5 rounded-xl border border-stone-700/60 focus:outline-none focus:border-amber-500">
+                        <label class="text-[10px] text-neutral-400 uppercase font-semibold block mb-1">Formato</label>
+                        <select id="sel-sweetstout" class="w-full bg-neutral-900 text-neutral-200 text-xs p-2.5 rounded-xl border border-neutral-700/60 focus:outline-none focus:border-amber-500">
                             <option value="Lata 473ml">Lata 473ml</option>
                             <option value="Botella 500ml">Botella 500ml</option>
                             <option value="Barril 20L">Barril 20L</option>
@@ -471,13 +389,13 @@
                     </div>
 
                     <div class="flex gap-2 items-center">
-                        <div class="flex items-center bg-stone-900 border border-stone-700/60 rounded-xl overflow-hidden">
-                            <button onclick="adjustQty('cant-sweetstout', -1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
-                            <input type="number" id="cant-sweetstout" value="1" min="1" class="w-9 bg-transparent text-center text-xs font-bold text-stone-100 focus:outline-none">
-                            <button onclick="adjustQty('cant-sweetstout', 1)" class="px-3 py-2 text-stone-400 hover:text-stone-100 hover:bg-stone-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
+                        <div class="flex items-center bg-neutral-900 border border-neutral-700/60 rounded-xl overflow-hidden">
+                            <button onclick="adjustQty('cant-sweetstout', -1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-minus text-[10px]"></i></button>
+                            <input type="number" id="cant-sweetstout" value="1" min="1" class="w-10 bg-transparent text-center text-xs font-bold text-neutral-100 focus:outline-none">
+                            <button onclick="adjustQty('cant-sweetstout', 1)" class="px-2.5 py-2 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition"><i class="fas fa-plus text-[10px]"></i></button>
                         </div>
-                        <button onclick="agregarAlCarrito('Sweet Stout', 'sel-sweetstout', 'cant-sweetstout')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-obsidian font-extrabold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-amber-500/20">
-                            <i class="fas fa-cart-plus text-xs"></i> Agregar
+                        <button onclick="agregarAlCarrito('Sweet Stout', 'sel-sweetstout', 'cant-sweetstout')" class="flex-1 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold py-2.5 px-3 text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/10">
+                            <i class="fas fa-plus text-[10px]"></i> Agregar
                         </button>
                     </div>
                 </div>
@@ -486,135 +404,121 @@
         </div>
     </section>
 
-    <section id="esencia" class="relative z-10 py-20 px-4 sm:px-8 border-t border-b border-stone-800/80 bg-stone-950/60">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-14">
-                <span class="text-amber-500 text-xs uppercase font-extrabold tracking-[0.25em] block mb-2">Proceso Artesanal</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-wider text-stone-100">
-                    Nuestra Esencia
-                </h2>
-                <div class="w-12 h-1 bg-amber-500 mx-auto mt-3 rounded-full"></div>
-            </div>
+    <!-- SECCIÓN NOSOTROS -->
+    <section id="nosotros" class="relative z-10 py-16 px-4 sm:px-8 max-w-6xl mx-auto w-full my-8">
+        <div class="glass-card rounded-3xl p-6 sm:p-12 border border-neutral-800 relative overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <span class="text-amber-500 text-xs font-bold uppercase tracking-widest block mb-2">Nuestra Historia</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-100 mb-4">Puro Respeto por la Cerveza</h2>
+                    <p class="text-neutral-300 text-xs sm:text-sm leading-relaxed mb-4">
+                        En **Bess ONE** empezamos en 2019 con un objetivo simple: elaborar cerveza artesanal de alta calidad respetando los procesos tradicionales de cocción y maduración.
+                    </p>
+                    <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed mb-6">
+                        Seleccionamos finas maltas importadas y nacionales, lúpulos frescos de la Patagonia y agua purificada con perfiles específicos para resaltar los atributos de cada estilo.
+                    </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Pillar 1 -->
-                <div class="glass-panel p-8 rounded-2xl border border-stone-800 text-center hover:border-amber-500/30 transition-all">
-                    <div class="w-16 h-16 mx-auto bg-amber-500/10 text-amber-500 rounded-2xl flex items-center justify-center text-2xl mb-6 border border-amber-500/20">
-                        <i class="fas fa-wheat-awn"></i>
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-neutral-800 text-center">
+                        <div>
+                            <span class="text-amber-500 text-xl font-bold block">7+</span>
+                            <span class="text-[10px] text-neutral-400 uppercase font-semibold">Estilos Únicos</span>
+                        </div>
+                        <div>
+                            <span class="text-amber-500 text-xl font-bold block">100%</span>
+                            <span class="text-[10px] text-neutral-400 uppercase font-semibold">Artesanal</span>
+                        </div>
+                        <div>
+                            <span class="text-amber-500 text-xl font-bold block">2019</span>
+                            <span class="text-[10px] text-neutral-400 uppercase font-semibold">Trayectoria</span>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-bold text-stone-100 mb-3">Maltas Importadas</h3>
-                    <p class="text-stone-400 text-xs leading-relaxed">Seleccionamos granos de malta de primera calidad para lograr cuerpos limpios, notas únicas y colores vibrantes en cada cocción.</p>
                 </div>
 
-                <!-- Pillar 2 -->
-                <div class="glass-panel p-8 rounded-2xl border border-stone-800 text-center hover:border-amber-500/30 transition-all">
-                    <div class="w-16 h-16 mx-auto bg-amber-500/10 text-amber-500 rounded-2xl flex items-center justify-center text-2xl mb-6 border border-amber-500/20">
-                        <i class="fas fa-hourglass-half"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-stone-100 mb-3">Tiempos Madurados</h3>
-                    <p class="text-stone-400 text-xs leading-relaxed">No apuramos los procesos naturales. Respetamos los tiempos de fermentación y maduración en frío para una máxima estabilidad.</p>
-                </div>
-
-                <!-- Pillar 3 -->
-                <div class="glass-panel p-8 rounded-2xl border border-stone-800 text-center hover:border-amber-500/30 transition-all">
-                    <div class="w-16 h-16 mx-auto bg-amber-500/10 text-amber-500 rounded-2xl flex items-center justify-center text-2xl mb-6 border border-amber-500/20">
-                        <i class="fas fa-beer-mug-empty"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-stone-100 mb-3">Pasión de Autor</h3>
-                    <p class="text-stone-400 text-xs leading-relaxed">Desde la formulación de la receta hasta el envasado final, cada lata y barril lleva nuestro sello artesanal intacto.</p>
+                <div class="flex justify-center items-center">
+                    <img src="Logo BessONE.png" alt="Nosotros Bess ONE" class="w-64 sm:w-80 h-auto object-contain drop-shadow-2xl opacity-90 hover:scale-105 transition-transform duration-500">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="relative z-10 max-w-4xl mx-auto py-12 px-6 sm:px-8 glass-panel rounded-3xl my-16 border border-stone-800/80 shadow-2xl">
-        <div class="flex justify-between items-center mb-6 pb-4 border-b border-stone-800">
+    <!-- RESUMEN DE COMPRA EN PÁGINA -->
+    <section class="relative z-10 max-w-3xl mx-auto py-8 px-6 glass-card rounded-2xl my-8 w-11/12 border border-neutral-800 shadow-2xl">
+        <div class="flex justify-between items-center mb-4 pb-3 border-b border-neutral-800">
             <div class="flex items-center gap-3">
-                <i class="fas fa-receipt text-amber-500 text-2xl"></i>
-                <div>
-                    <h3 class="text-xl font-extrabold text-stone-100">Resumen de Tu Pedido</h3>
-                    <p class="text-xs text-stone-400">Revisá tu selección antes de enviar a WhatsApp</p>
-                </div>
+                <i class="fas fa-receipt text-amber-500 text-xl"></i>
+                <h3 class="text-xl font-bold text-neutral-100">Tu Pedido Actual</h3>
             </div>
-            <span id="items-badge" class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/30 px-3.5 py-1 rounded-full font-bold">0 ítems</span>
+            <span id="items-badge" class="text-xs bg-neutral-800 text-neutral-300 px-3 py-1 rounded-full font-semibold">0 items</span>
         </div>
 
-        <ul id="lista-pedido" class="text-stone-300 text-sm mb-8 space-y-3 min-h-[80px]">
-            <li class="italic text-stone-500 text-center py-6">No has agregado estilos aún. Explora la carta arriba.</li>
+        <ul id="lista-pedido" class="text-neutral-300 text-sm mb-6 space-y-2 min-h-[60px]">
+            <li class="italic text-neutral-500 text-center py-4">Todavía no agregaste productos a tu selección.</li>
         </ul>
 
-        <div class="flex flex-col sm:flex-row gap-4">
-            <button onclick="limpiarCarrito()" class="w-full sm:w-1/3 bg-stone-900 hover:bg-red-950/60 text-stone-400 hover:text-red-300 font-bold py-3.5 rounded-2xl border border-stone-800 transition-colors active:scale-95 flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
-                <i class="fas fa-trash-alt"></i> Vaciar Selección
+        <div class="flex flex-col sm:flex-row gap-3">
+            <button onclick="limpiarCarrito()" class="w-full sm:w-1/3 bg-neutral-900 hover:bg-red-900/60 text-neutral-400 hover:text-red-200 font-semibold py-3 rounded-xl border border-neutral-800 transition-colors active:scale-95 flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
+                <i class="fas fa-trash-alt"></i> Limpiar
             </button>
 
-            <button onclick="finalizarPedido()" class="w-full sm:w-2/3 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-extrabold py-3.5 rounded-2xl transition-all shadow-xl shadow-emerald-600/20 active:scale-95 flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
-                <i class="fab fa-whatsapp text-lg"></i> Enviar Pedido a WhatsApp Directo
+            <button onclick="finalizarPedido()" class="w-full sm:w-2/3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-emerald-600/20 active:scale-95 flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
+                <i class="fab fa-whatsapp text-base"></i> Pedir por WhatsApp
             </button>
         </div>
     </section>
 
-    <footer id="contacto" class="relative z-10 py-16 text-center border-t border-stone-800/80 bg-stone-950/90">
-        <div class="max-w-4xl mx-auto px-4">
-            <img src="Logo BessONE.png" onerror="this.onerror=null; this.src='https://placehold.co/120x50/1c1917/f59e0b?text=Bess+ONE'" alt="Logo Bess ONE" class="h-16 mx-auto mb-6 object-contain">
-            
-            <h4 class="text-2xl font-extrabold mb-2 text-stone-100">¿Listo para saborear una Bess ONE?</h4>
-            <p class="text-stone-400 text-xs sm:text-sm max-w-md mx-auto mb-8 leading-relaxed">
-                Escribinos para pedidos de eventos, tiradas especiales o barriles comerciales.
-            </p>
+    <!-- FOOTER -->
+    <footer id="contacto" class="relative z-10 py-12 text-center border-t border-neutral-800/80 bg-neutral-950/90">
+        <h4 class="text-2xl font-bold mb-2 text-neutral-100">¿Querés probar Bess ONE?</h4>
+        <p class="text-neutral-400 text-sm mb-6">Contactanos por nuestras redes sociales para envíos, eventos y barriles.</p>
 
-            <div class="flex justify-center gap-4 mb-10">
-                <a href="https://www.instagram.com/cervezaartesanalbessone?igsh=cjFoMGRhNWJqb3g0" target="_blank" class="w-12 h-12 rounded-2xl bg-stone-900 border border-stone-800 text-stone-300 hover:text-amber-400 hover:border-amber-500/50 flex items-center justify-center text-xl transition-all shadow-lg hover:scale-105">
-                    <i class="fab fa-instagram"></i>
-                </a>
+        <div class="flex justify-center gap-4 mb-8">
+            <a href="https://www.instagram.com/cervezaartesanalbessone?igsh=cjFoMGRhNWJqb3g0" target="_blank" class="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-amber-500 hover:border-amber-500/50 flex items-center justify-center text-xl transition-all">
+                <i class="fab fa-instagram"></i>
+            </a>
 
-                <a href="https://wa.me/5491158024010" target="_blank" class="w-12 h-12 rounded-2xl bg-stone-900 border border-stone-800 text-stone-300 hover:text-emerald-400 hover:border-emerald-500/50 flex items-center justify-center text-xl transition-all shadow-lg hover:scale-105">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-            </div>
-
-            <p class="text-stone-600 text-xs tracking-wider">&copy; 2026 Bess ONE Cerveza Artesanal. Todos los derechos reservados.</p>
+            <a href="https://wa.me/5491158024010" target="_blank" class="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-emerald-500 hover:border-emerald-500/50 flex items-center justify-center text-xl transition-all">
+                <i class="fab fa-whatsapp"></i>
+            </a>
         </div>
+
+        <p class="text-neutral-600 text-xs">&copy; 2026 Bess ONE Cerveza Artesanal. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Cart Drawer Overlay -->
-    <div id="cart-drawer-overlay" onclick="toggleCartDrawer()" class="fixed inset-0 bg-obsidian/80 backdrop-blur-md z-50 hidden transition-opacity"></div>
-    
-    <!-- Slide-over Drawer -->
-    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-stone-950 z-50 transform translate-x-full transition-transform duration-300 ease-out border-l border-stone-800 flex flex-col justify-between p-6 shadow-2xl">
+    <!-- CART DRAWER LATERAL -->
+    <div id="cart-drawer-overlay" onclick="toggleCartDrawer()" class="fixed inset-0 bg-neutral-950/80 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-neutral-900 z-50 transform translate-x-full transition-transform duration-300 border-l border-neutral-800 flex flex-col justify-between p-6">
         <div>
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-stone-800">
-                <div class="flex items-center gap-2.5">
-                    <i class="fas fa-shopping-bag text-amber-500 text-lg"></i>
-                    <h3 class="text-lg font-extrabold text-stone-100">Tu Carrito</h3>
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-neutral-800">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-shopping-bag text-amber-500"></i>
+                    <h3 class="text-lg font-bold text-neutral-100">Tu Pedido</h3>
                 </div>
-                <button onclick="toggleCartDrawer()" class="text-stone-400 hover:text-stone-100 p-2 text-base transition-colors"><i class="fas fa-times"></i></button>
+                <button onclick="toggleCartDrawer()" class="text-neutral-400 hover:text-neutral-100 p-2"><i class="fas fa-times"></i></button>
             </div>
-            
             <ul id="drawer-lista-pedido" class="space-y-3 max-h-[65vh] overflow-y-auto pr-2">
-                <li class="italic text-stone-500 text-center py-10">Tu carrito está vacío.</li>
+                <li class="italic text-neutral-500 text-center py-8">Tu carrito está vacío.</li>
             </ul>
         </div>
-
-        <div class="pt-6 border-t border-stone-800 space-y-3">
-            <button onclick="finalizarPedido()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-4 rounded-xl transition-all shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
-                <i class="fab fa-whatsapp text-lg"></i> Enviar a WhatsApp
+        <div class="pt-4 border-t border-neutral-800 space-y-3">
+            <button onclick="finalizarPedido()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
+                <i class="fab fa-whatsapp text-base"></i> Confirmar por WhatsApp
             </button>
-            <button onclick="limpiarCarrito()" class="w-full bg-stone-900 hover:bg-stone-800 text-stone-400 font-semibold py-2.5 rounded-xl transition-colors text-xs uppercase tracking-wider border border-stone-800">
-                Limpiar Todo
+            <button onclick="limpiarCarrito()" class="w-full bg-neutral-800 hover:bg-red-900/60 text-neutral-400 hover:text-red-200 font-semibold py-2.5 rounded-xl transition-colors text-xs uppercase tracking-wider">
+                Vaciar Pedido
             </button>
         </div>
     </div>
 
-    <div id="toast" class="fixed bottom-6 right-6 bg-gradient-to-r from-amber-500 to-amber-600 text-obsidian font-extrabold px-5 py-3.5 rounded-2xl shadow-2xl z-50 transform translate-y-28 opacity-0 transition-all duration-300 flex items-center gap-3 text-xs border border-amber-400/30">
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-amber-500 text-neutral-950 font-bold px-4 py-3 rounded-xl shadow-2xl z-50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-2 text-xs">
         <i class="fas fa-check-circle text-base"></i>
-        <span id="toast-msg">Producto agregado</span>
+        <span id="toast-msg">Agregado al pedido</span>
     </div>
 
+    <!-- JAVASCRIPT -->
     <script>
         let miPedido = [];
 
-        // Quantity controls
         function adjustQty(id, delta) {
             const input = document.getElementById(id);
             let val = parseInt(input.value) || 1;
@@ -622,35 +526,25 @@
             input.value = val;
         }
 
-        // Add beer to cart logic
         function agregarAlCarrito(prod, idSelect, idCant) {
-            const formato = document.getElementById(idSelect).value;
-            const cantidad = parseInt(document.getElementById(idCant).value) || 1;
+            let formato = document.getElementById(idSelect).value;
+            let cantidad = parseInt(document.getElementById(idCant).value) || 1;
 
-            // Check if item exists with same format
-            const existingIndex = miPedido.findIndex(item => item.producto === prod && item.formato === formato);
+            miPedido.push({
+                producto: prod,
+                formato: formato,
+                cantidad: cantidad
+            });
 
-            if (existingIndex > -1) {
-                miPedido[existingIndex].cantidad += cantidad;
-            } else {
-                miPedido.push({
-                    producto: prod,
-                    formato: formato,
-                    cantidad: cantidad
-                });
-            }
-
-            showToast(`¡Agregado! ${cantidad}x ${prod} (${formato})`);
+            showToast(`Agregado: ${cantidad}x ${prod} (${formato})`);
             actualizarLista();
         }
 
-        // Remove item from cart
         function eliminarDelCarrito(index) {
             miPedido.splice(index, 1);
             actualizarLista();
         }
 
-        // Update UI representations
         function actualizarLista() {
             const lista = document.getElementById('lista-pedido');
             const drawerLista = document.getElementById('drawer-lista-pedido');
@@ -658,27 +552,24 @@
             const navBadge = document.getElementById('nav-cart-count');
 
             let totalItems = miPedido.reduce((acc, curr) => acc + curr.cantidad, 0);
-            badge.innerText = `${totalItems} ${totalItems === 1 ? 'ítem' : 'ítems'}`;
+            badge.innerText = `${totalItems} ${totalItems === 1 ? 'item' : 'items'}`;
             navBadge.innerText = totalItems;
 
             if (miPedido.length === 0) {
-                const emptyHTML = '<li class="italic text-stone-500 text-center py-6">No has agregado estilos aún. Explora la carta arriba.</li>';
-                const emptyDrawerHTML = '<li class="italic text-stone-500 text-center py-10">Tu carrito está vacío.</li>';
+                const emptyHTML = '<li class="italic text-neutral-500 text-center py-4">Todavía no agregaste productos a tu selección.</li>';
                 lista.innerHTML = emptyHTML;
-                drawerLista.innerHTML = emptyDrawerHTML;
+                drawerLista.innerHTML = '<li class="italic text-neutral-500 text-center py-8">Tu carrito está vacío.</li>';
             } else {
                 let html = miPedido.map((item, idx) => `
-                    <li class="flex justify-between items-center bg-stone-900/90 p-3.5 rounded-2xl border border-stone-800/90">
+                    <li class="flex justify-between items-center bg-neutral-900/80 p-3 rounded-xl border border-neutral-800">
                         <div class="flex items-center gap-3">
-                            <span class="bg-amber-500/20 text-amber-400 font-extrabold text-xs px-2.5 py-1 rounded-lg border border-amber-500/30">${item.cantidad}x</span>
+                            <span class="bg-amber-500/20 text-amber-400 font-bold text-xs px-2 py-1 rounded-md border border-amber-500/30">${item.cantidad}x</span>
                             <div>
-                                <p class="font-bold text-stone-100 text-xs sm:text-sm">${item.producto}</p>
-                                <p class="text-[10px] text-stone-400 uppercase font-semibold">${item.formato}</p>
+                                <p class="font-bold text-neutral-200 text-xs sm:text-sm">${item.producto}</p>
+                                <p class="text-[10px] text-neutral-400">${item.formato}</p>
                             </div>
                         </div>
-                        <button onclick="eliminarDelCarrito(${idx})" class="text-stone-500 hover:text-red-400 p-2 transition-colors">
-                            <i class="fas fa-trash-alt text-xs"></i>
-                        </button>
+                        <button onclick="eliminarDelCarrito(${idx})" class="text-neutral-500 hover:text-red-400 p-1.5 transition"><i class="fas fa-trash-alt text-xs"></i></button>
                     </li>
                 `).join('');
 
@@ -687,15 +578,12 @@
             }
         }
 
-        // Clear Cart
         function limpiarCarrito() {
-            if (miPedido.length === 0) return;
             miPedido = [];
             actualizarLista();
             showToast("Se vació el pedido");
         }
 
-        // Slide Drawer Toggle
         function toggleCartDrawer() {
             const drawer = document.getElementById('cart-drawer');
             const overlay = document.getElementById('cart-drawer-overlay');
@@ -703,46 +591,23 @@
             overlay.classList.toggle('hidden');
         }
 
-        // Toast Feedback Alert
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-msg').innerText = msg;
-            toast.classList.remove('translate-y-28', 'opacity-0');
+            toast.classList.remove('translate-y-24', 'opacity-0');
             setTimeout(() => {
-                toast.classList.add('translate-y-28', 'opacity-0');
+                toast.classList.add('translate-y-24', 'opacity-0');
             }, 2500);
         }
 
-        // Filter Categories
-        function filterBeers(category) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-amber-500', 'text-obsidian', 'border-amber-500/30');
-                btn.classList.add('bg-stone-900/60', 'text-stone-300', 'border-stone-800');
-            });
-
-            event.target.classList.remove('bg-stone-900/60', 'text-stone-300', 'border-stone-800');
-            event.target.classList.add('bg-amber-500', 'text-obsidian', 'border-amber-500/30');
-
-            const cards = document.querySelectorAll('.beer-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category.includes(category)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Generate WhatsApp Message
         function finalizarPedido() {
             if (miPedido.length === 0) {
-                showToast("⚠️ Agregá al menos una cerveza primero.");
+                alert("Agregá al menos una cerveza a tu pedido.");
                 return;
             }
 
-            let lineas = miPedido.map(item => `• *${item.cantidad}x* ${item.producto} _(${item.formato})_`);
-            let texto = "¡Hola *Bess ONE*! 👋%0AQuiero realizar el siguiente pedido:%0A%0A" + lineas.join("%0A") + "%0A%0A¡Muchas gracias!";
+            let lineas = miPedido.map(item => `• ${item.cantidad}x ${item.producto} (${item.formato})`);
+            let texto = "¡Hola! Quiero hacer este pedido de Bess ONE:%0A%0A" + lineas.join("%0A");
 
             window.open("https://wa.me/5491158024010?text=" + texto, "_blank");
         }
