@@ -1,0 +1,9 @@
+{
+  "name": "bessone-cerveza-artesanal",
+  "version": "1.0.0",
+  "description": "Tienda online Bess ONE con Mercado Pago",
+  "main": "index.html",
+  "dependencies": {
+    "mercadopago": "^2.0.15"
+  }
+}
